@@ -1,3 +1,3 @@
 import calcul
 
-calcul.calcul_arrosage(0,0,0,0)
+calcul.calcul_arrosage("capteur1",15,50,25)
