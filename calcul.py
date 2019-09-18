@@ -13,7 +13,7 @@ def calculDPV(temperature, humidité_air):
 def calcul_arrosage(ID_capteur, temperature, humidité_air, humidité_sol):
     DPV = calculDPV(temperature, humidité_air)
     connection = confBDD.getConnection()
-    if (DPV < 4.5 && DPV > 12.5 && humidité_sol < 15 && humidité_sol > 30):
+    if (DPV < 4.5 and DPV > 12.5 and humidité_sol < 15 and humidité_sol > 30):
         
     elif
 
