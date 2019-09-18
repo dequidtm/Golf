@@ -14,15 +14,15 @@ def calcul_arrosage(ID_capteur, temperature, humidité_air, humidité_sol):
     DPV = calculDPV(temperature, humidité_air)
     connection = confBDD.getConnection()
     if (DPV < 4.5 and DPV > 12.5 and humidité_sol < 15 and humidité_sol > 30):
-        
-    elif
-
+        arrosage = "non"
+    else :
+        arrosage = "oui"
     try:
-    with connection.cursor() as cursor:
-        sql = ""
-        cursor.execute(sql)
+        with connection.cursor() as cursor:
+            sql = ""
+            cursor.execute(sql)
     finally:     
-    connection.close()
+        connection.close()
     return 0
 
 
