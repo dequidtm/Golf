@@ -11,18 +11,20 @@ def calculDPV(temperature, humidité_air):
     print (DPV)
     return (DPV)
 
-def calcul_arrosage(ID_capteur, temperature, humidité_air, humidité_sol):
+def calcul_arrosage(arduino_id, temperature, humidité_air, humidité_sol):
     DPV = calculDPV(temperature, humidité_air)
     connection = confBDD.getConnection()
     if (DPV > 4.5 and DPV < 12.5 and humidité_sol > 15 and humidité_sol < 30):
-        arrosage = "non"
+        arrosage = 0
     else :
-        arrosage = "oui"
+        arrosage = 1
     try:
         with connection.cursor() as cursor:
-            sql = "INSERT INTO MESURE (DATE_MESURE, ID_CAPTEUR, TEMPERATURE, HUMIDITE_AIR, HUMIDITE_SOL, ARROSAGE) VALUES('" + datetime.now().strftime("%Y-%m-%d %H:%M:%S")  + "','" + ID_capteur + "','" + str(temperature) + "','" + str(humidité_air) + "','" + str(humidité_sol) + "','" + arrosage + "')"
-            print (sql)
-            cursor.execute(sql)
+            sql = "INSERT INTO info (info_type, info_arduino, info_value, info_date) VALUES('%s','%s','%s','" + datetime.now().strftime("%Y-%m-%d %H:%M:%S") + "')"
+            cursor.execute(sql,(1, arduino_id, temperature))
+            cursor.execute(sql,(2, arduino_id, humidité_air))
+            cursor.execute(sql,(3, arduino_id, humidité_sol))
+            cursor.execute(sql,(4, arduino_id, arrosage))
     finally:     
         connection.close()
     return 0
