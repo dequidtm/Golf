@@ -28,7 +28,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Golf.py" />
-    <Compile Include="CSV.py">
+    <Compile Include="CSV_golf.py">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
