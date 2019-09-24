@@ -4,6 +4,7 @@ import math
 from datetime import datetime
 
 
+
 def calculDPV(temperature, humidité_air):
     SVP = math.exp((13.7 - 5120 / ( temperature + 273.15 ))) * 1000
     print (SVP)
@@ -27,6 +28,6 @@ def calcul_arrosage(arduino_id, temperature, humidité_air, humidité_sol):
             cursor.execute(sql,(4, arduino_id, arrosage))
     finally:     
         connection.close()
-    return 0
+    return (arrosage*arduino_id)
 
 

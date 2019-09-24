@@ -1,3 +1,5 @@
 import calcul
+from threading import Thread
 
-calcul.calcul_arrosage(1,15,50,25)
+Thread.start(calcul.calcul_arrosage(1,15,50,25))
+
