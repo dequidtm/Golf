@@ -21,7 +21,17 @@ def calcul_arrosage(arduino_id, temperature, humidité_air, humidité_sol):
     if (DPV > 4.5 and DPV < 12.5 and humidité_sol > 15 and humidité_sol < 30):
         arrosage = 0
     else :
-        arrosage = 1
+        sql = "SELECT * FROM water WHERE water_day = " + str(datetime.now().weekday()) + ";"
+        print(sql)
+        cursor = connection.cursor()
+        cursor.execute(sql)
+        for row in cursor :
+            print(row)
+            if (row["water_start"] < datetime.now().hour and row["water_end"] > datetime.now().hour ) :
+                arrosage = 1
+            else :
+                arrosage = 0
+        
     try:
         with connection.cursor() as cursor:
             sql = "INSERT INTO info (info_type, info_arduino, info_value, info_date) VALUES('%s','%s','%s','" + String_now + "')"
